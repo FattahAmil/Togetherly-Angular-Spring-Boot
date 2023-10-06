@@ -76,31 +76,6 @@ This is a Togetherly project built with Spring Boot (backend) and Angular (front
    - Follow other users and chat with friends.
    - Receive notifications for activity on your Togetherly account.
 
-## Contributing
-
-Contributions are welcome! Please follow these steps:
-
-1. Fork the repository.
-
-2. Create a new branch for your feature or bug fix:
-
-   ```bash
-   git checkout -b feature/my-feature
-   ```
-
-3. Commit your changes:
-
-   ```bash
-   git commit -m "Add new feature"
-   ```
-
-4. Push to your fork:
-
-   ```bash
-   git push origin feature/my-feature
-   ```
-
-5. Create a pull request to the main repository.
 
 ## License
 
