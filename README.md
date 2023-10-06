@@ -23,6 +23,25 @@ This is a Togetherly project built with Spring Boot (backend) and Angular (front
 
 - **Real-time Chat**: Users can chat with their friends in real-time using web sockets.
 
+## Images
+
+![GitHub 1](./images/1.png)
+![GitHub 2](./images/2.png)
+![GitHub 3](./images/3.png)
+![GitHub 4](./images/4.png)
+![GitHub 5](./images/5.png)
+![GitHub 6](./images/6.png)
+![GitHub 7](./images/7.png)
+![GitHub 8](./images/8.png)
+![GitHub 9](./images/9.png)
+![GitHub 10](./images/10.png)
+![GitHub 11](./images/11.png)
+![GitHub 12](./images/12.png)
+![GitHub 13](./images/13.png)
+![GitHub 14](./images/14.png)
+![GitHub 15](./images/15.png)
+
+
 ## Installation
 
 ### Backend (Spring Boot)
