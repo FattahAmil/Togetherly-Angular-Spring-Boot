@@ -1,0 +1,123 @@
+
+
+<div class="w-full mx-auto mt-6">
+    
+    <div *ngIf="!isLoading" role="status" class="animate-pulse">
+        <div class="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 max-w-[640px] mb-2.5 mx-auto"></div>
+        <div class="h-2.5 mx-auto bg-gray-300 rounded-full dark:bg-gray-700 max-w-[540px]"></div>
+        <div class="flex items-center justify-center mt-4">
+            <svg class="w-8 h-8 text-gray-200 dark:text-gray-700 mr-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+            </svg>
+            <div class="w-20 h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 mr-3"></div>
+            <div class="w-24 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+        </div>
+        <span class="sr-only">Loading...</span>
+    </div>
+
+    <div *ngIf="isLoading" class="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
+        <form [formGroup]="form"  (ngSubmit)="onUpdate()">
+
+            <div class="rounded-t bg-white mb-0 px-6 py-6">
+                <div class="text-center flex justify-between">
+                    <h6 class="text-blueGray-700 text-xl font-bold">
+                    My account
+                    </h6>
+                    <button id="save" class="bg-blue-500 text-white active:bg-blue-600 font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150" type="submit">
+                    save
+                    </button>
+                </div>
+            </div>
+            <div class="flex-auto px-4 lg:px-10 py-10 pt-0">
+                    <h6 class="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
+                    User Information
+                    </h6>
+                    <div class="flex flex-wrap">
+                        <div class="w-full lg:w-6/12 p-4">
+                            <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlfor="grid-password">
+                                Your profile image
+                            </label>
+                            <div class="flex items-center space-x-6">
+                                <div class="shrink-0">
+                                <img id='preview_img' class="h-16 w-16 object-cover rounded-full" [src]="imageUrl" alt="Current profile photo" />
+                                </div>
+                                <label class="block">
+                                <span class="sr-only">Choose profile photo</span>
+                                <input type="file" id="image" (change)="onSelecteImage($event)" class="block w-full text-sm text-slate-500
+                                    file:mr-4 file:py-2 file:px-4
+                                    file:rounded-full file:border-0
+                                    file:text-sm file:font-semibold
+                                    file:bg-violet-50 file:text-violet-700
+                                    hover:file:bg-violet-100
+                                "/>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-6/12 px-4">
+                        
+                        </div>
+                        
+                        <div class="w-full lg:w-6/12 px-4">
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-sm font-bold mb-2"  htmlfor="grid-password">
+                                    First Name
+                                </label>
+                                <input type="text" id="firstName" maxlength="20" formControlName="firstName" required class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"  >
+                                <div *ngIf="form.get('firstName')?.hasError('required') && (form.get('firstName')?.dirty || form.get('firstName')?.touched)">
+                                    <div class="text-red-500 text-xs">First name is required.</div>
+                                </div>
+                                <div *ngIf="form.get('firstName')?.hasError('pattern')  && (form.get('firstName')?.dirty || form.get('firstName')?.touched)">
+                                    <div class="text-red-500 text-xs">First name should contains only letters.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-6/12 px-4">
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-sm font-bold mb-2" htmlfor="grid-password">
+                                    Last Name
+                                </label>
+                                <input type="text" id="lastName" maxlength="20" formControlName="lastName" class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" >
+                                <div *ngIf="form.get('lastName')?.hasError('required') && (form.get('lastName')?.dirty || form.get('lastName')?.touched)">
+                                    <div class="text-red-500 text-xs">Last name is required.</div>
+                                </div>
+                                <div *ngIf="form.get('lastName')?.hasError('pattern')  && (form.get('lastName')?.dirty || form.get('lastName')?.touched)">
+                                    <div class="text-red-500 text-xs">Last name should contains only letters.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-6/12 px-4">
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-sm font-bold mb-2" htmlfor="grid-password">
+                                    Email address <span class="text-gray-500 text-xs lowercase font-light">*read only</span>
+                                </label>
+                                <input type="email"  maxlength="75" formControlName="email" readonly id="email" class="border-0 px-3 py-3 placeholder-blueGray-300 cursor-not-allowed  text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"  >
+                                <div *ngIf="form.get('email')?.hasError('required') && (form.get('email')?.dirty || form.get('email')?.touched)">
+                                    <div class="text-red-500 text-xs">email is required.</div>
+                                </div>
+                                <div *ngIf="form.get('email')?.hasError('pattern')  && (form.get('email')?.dirty || form.get('email')?.touched)">
+                                    <div class="text-red-500 text-xs">Invalid email format (valid@example.com).</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full lg:w-6/12 flex flex-col justify-center px-4">
+                            <label for="roles" class="block uppercase text-blueGray-600 text-sm font-bold mb-2" htmlfor="grid-password">
+                                Roles
+                            </label>
+                            <select id="roles" [(ngModel)]="selectedRole"  [ngModelOptions]="{standalone: true}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" >
+                            <option value="ROLE_ADMIN">Admin</option>
+                            <option value="ROLE_TEACHER">Teacher</option>
+                            <option value="ROLE_STUDENT">Student</option>
+                            
+                            </select>
+                        </div>
+                        
+                        
+                        
+                    </div>
+
+                
+            
+            </div>
+        </form>
+    </div>
+</div>

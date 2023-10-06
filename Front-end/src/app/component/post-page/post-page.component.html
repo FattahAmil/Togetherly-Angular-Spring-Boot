@@ -1,0 +1,142 @@
+<app-nav-bar ></app-nav-bar>
+<div class="flex w-full h-full justify-center pb-5 items-center">
+    
+    <div *ngIf="!isLoading" role="status" class="max-w-sm p-4 border border-gray-200 rounded shadow animate-pulse md:p-6 dark:border-gray-700">
+        <div class="flex items-center justify-center h-48 mb-4 bg-gray-300 rounded dark:bg-gray-700">
+            <svg class="w-10 h-10 text-gray-200 dark:text-gray-600" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 20">
+                <path d="M14.066 0H7v5a2 2 0 0 1-2 2H0v11a1.97 1.97 0 0 0 1.934 2h12.132A1.97 1.97 0 0 0 16 18V2a1.97 1.97 0 0 0-1.934-2ZM10.5 6a1.5 1.5 0 1 1 0 2.999A1.5 1.5 0 0 1 10.5 6Zm2.221 10.515a1 1 0 0 1-.858.485h-8a1 1 0 0 1-.9-1.43L5.6 10.039a.978.978 0 0 1 .936-.57 1 1 0 0 1 .9.632l1.181 2.981.541-1a.945.945 0 0 1 .883-.522 1 1 0 0 1 .879.529l1.832 3.438a1 1 0 0 1-.031.988Z"/>
+                <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.98 2.98 0 0 0 .13 5H5Z"/>
+            </svg>
+        </div>
+        <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-48 mb-4"></div>
+        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700 mb-2.5"></div>
+        <div class="h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+        <div class="flex items-center mt-4 space-x-3">
+        <svg class="w-10 h-10 text-gray-200 dark:text-gray-700" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 0a10 10 0 1 0 10 10A10.011 10.011 0 0 0 10 0Zm0 5a3 3 0 1 1 0 6 3 3 0 0 1 0-6Zm0 13a8.949 8.949 0 0 1-4.951-1.488A3.987 3.987 0 0 1 9 13h2a3.987 3.987 0 0 1 3.951 3.512A8.949 8.949 0 0 1 10 18Z"/>
+            </svg>
+            <div>
+                <div class="h-2.5 bg-gray-200 rounded-full dark:bg-gray-700 w-32 mb-2"></div>
+                <div class="w-48 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+        </div>
+        <span class="sr-only">Loading...</span>
+    </div>
+
+    <div *ngIf="isLoading" class="shadow-xl flex max-[900px]:flex-col min-w-[310px] rounded-md border w-7/12 h-full ">
+        <div class="w-full items-center justify-center border-r flex rounded">  
+            <div *ngIf="ifTherIsMedia()" (click)="navigateToPostPage(post.id)" class="flex cursor-pointer  gap-2">
+                <div *ngFor="let Media of post.mediaList;let i=index;">
+                    <img *ngIf="isImage(Media.fileType)" class="h-full max-w-full  rounded-lg" [src]="pathGen(Media.mediaData)" alt="">
+                    <video *ngIf="isVideo(Media.fileType)" class="h-full max-w-full rounded-lg hover:opacity-70 transition-opacity duration-300" controls>
+                        <source [src]="pathGen(Media.mediaData)" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+            
+                <div *ngIf="!ifTherIsMedia()" draggable="true" class=" flex mt-2 bg-gray-100 rounded-lg shadow-lg w-11/12 ">
+                    <h5 class="m-2 text-2xl font-bold tracking-tight break-all text-gray-900 dark:text-white">{{post.content}}</h5>
+                </div>
+           
+        </div>
+        <div class="min-w-[300px] h-full">
+            <div class="flex justify-between h-[60px] w-full items-center border-b">
+                <div class="flex items-center">
+                    <img (click)="navigateToProfilePage(post.user.email)" [src]="post.user.profileImage" alt=""  class="object-cover mx-2 cursor-pointer object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-700">
+                    <div (click)="navigateToProfilePage(post.user.email)" class="-space-y-1">
+                        <h2 class="text-sm cursor-pointer font-semibold leadi">{{post.user.firstName+' '+post.user.lastName}}</h2>
+                        <span class="inline-block text-xs leadi dark:text-gray-400">{{timeGenerator(post.created_at)}}</span>
+                    </div>
+                </div>
+                <button *ngIf="checkIsAdminOrIsYourPosts(post.user.id)" (click)="dropDownMenue()" id="dropdownMenuIconButton" data-dropdown-toggle="dropdownDotsHorizontal" class="inline-flex items-center mr-1 p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                    <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 3">
+                      <path d="M2 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Zm6.041 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM14 0a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"/>
+                    </svg>
+                  </button>
+                </div>  
+                  <!-- Dropdown menu -->
+                    <div class="flex justify-end">
+                        <div [ngClass]="{'hidden': isHidden,'': !isHidden}"   class="z-10 hidden absolute bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-2 text-sm text-red-700 dark:text-red-600" aria-labelledby="dropdownMenuIconButton">
+                                <li>
+                                <a (click)="dropDownMenueConfirm()" class="block px-4 py-2 font-semibold hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
+                                </li>
+                            </ul>
+                            <div class="p-2 justify-center  hidden"  [ngClass]="{'hidden': isHidden2,'flex': !isHidden2}" >
+                                <button type="button" (click)="deletePost(post.id)" class="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-red-700 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-red-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-red-700 dark:border-red-600 dark:hover:text-white dark:hover:bg-gray-700">Yes</button>
+                                <button type="button" (click)="dropDownMenueConfirm()" class="text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">No</button>
+                            </div>
+                        </div>
+                    </div>
+            <div class="h-[288px] overflow-hidden overflow-y-scroll">
+                <div class="space-y-3  mt-4 p-2">
+                    <div class="flex">
+                        <img (click)="navigateToProfilePage(post.user.email)" [src]="post.user.profileImage" alt="" class="object-cover cursor-pointer mx-2 object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-700">
+                        <span (click)="navigateToProfilePage(post.user.email)" class="text-sm cursor-pointer font-semibold">{{post.user.firstName+' '+post.user.lastName}}
+                            <span  class="text-sm cursor-pointer break-all font-normal">{{post.content}}</span>
+                        </span>
+                    </div>
+                    <span class="text-xs ml-14 font-normal text-gray-400">{{timeGenerator(post.created_at)}}</span>
+                </div>
+                <div *ngFor="let comment of post.comment;let i=index" class="space-y-3  mt-4 p-2">
+                    <div class="flex justify-between">
+                        <div class="flex">
+                        <img (click)="navigateToProfilePage(comment.users.email)" [src]="comment.users.profileImage" alt="" class="object-cover cursor-pointer mx-2 object-center w-8 h-8 rounded-full shadow-sm dark:bg-gray-500 dark:border-gray-700">
+                        <span (click)="navigateToProfilePage(comment.user.email)" class="text-sm cursor-pointer font-semibold">{{comment.users.firstName+' '+comment.users.lastName}}
+                            <span (click)="navigateToPostPage(post.id)" class="text-sm cursor-pointer break-all font-normal">{{comment.content}}</span>
+                        </span>
+                        </div>
+                        <button *ngIf="checkIsAdminOrIsYourPostsOrIsYourComment(post.user.id,comment.users.id)" (click)="dropDownMenueComment(i)"  data-dropdown-toggle="dropdownDots" class="inline-flex items-center p-2 text-sm font-medium text-center text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-600" type="button"> 
+                            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 4 15">
+                              <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"/>
+                            </svg>
+                        </button>   
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-xs ml-14 h-7 block font-normal text-gray-400">{{timeGenerator(comment.created_at)}}</span>
+                        <div [id]="'menueDeleteComment'+i"  class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-28 dark:bg-gray-700 dark:divide-gray-600">
+                            <ul class="py-1 text-sm text-red-700 dark:text-red-600" aria-labelledby="dropdownMenuIconButton">
+                                <li>
+                                <a (click)="deleteComment(comment.idComment)" class="block px-2  font-semibold hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                   
+            </div>
+            <div class="border-t">
+                <div class="flex px-4 py-2 items-center space-x-3">
+                    <button type="button" (click)="likePost(post.id,post.user.email)" id="like" title="Like post" [ngClass]="{'text-red-600': post.isLiked,'text-white': !post.isLiked}" class="flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5"  fill="currentColor" stroke="black"  class="w-5  h-5">
+                            <path d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z" />
+                        </svg>									
+                    </button>
+                    <button type="button" (click)="navigateToPostPage(post.id)" title="Add a comment" class="flex items-center justify-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current">
+                            <path d="M496,496H480a273.39,273.39,0,0,1-179.025-66.782l-16.827-14.584C274.814,415.542,265.376,416,256,416c-63.527,0-123.385-20.431-168.548-57.529C41.375,320.623,16,270.025,16,216S41.375,111.377,87.452,73.529C132.615,36.431,192.473,16,256,16S379.385,36.431,424.548,73.529C470.625,111.377,496,161.975,496,216a171.161,171.161,0,0,1-21.077,82.151,201.505,201.505,0,0,1-47.065,57.537,285.22,285.22,0,0,0,63.455,97L496,457.373ZM294.456,381.222l27.477,23.814a241.379,241.379,0,0,0,135,57.86,317.5,317.5,0,0,1-62.617-105.583v0l-4.395-12.463,9.209-7.068C440.963,305.678,464,262.429,464,216c0-92.636-93.309-168-208-168S48,123.364,48,216s93.309,168,208,168a259.114,259.114,0,0,0,31.4-1.913Z"></path>
+                        </svg>
+                    </button>
+                </div>
+                <div class="flex flex-wrap items-center px-4 pt-2 pb-1">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-sm">Liked by
+                            <span class="font-semibold">{{post.numberLikes}} person</span>
+                        </span>
+                    </div>
+                </div>
+                <div class="overflow-hidden flex p-3">
+                    <textarea id="OrderNotes" (keydown)="onWrite($event)" [(ngModel)]="contentOfComment" maxlength="71" class="w-full resize-none border-x-0 border-y-0 border-gray-200 target:border-0 px-0 align-top sm:text-sm" rows="1" placeholder="Add a comment here..."></textarea> 
+                    <button type="button" (click)="createComment()" class="rounded  px-3 py-1.5 text-sm font-medium text-blue-400 hover:text-indigo-500" >
+                        send
+                    </button>
+                </div>
+                <div class="flex w-10/12 mb-2 justify-end text-xs">{{length}}/70</div>
+            </div>
+        </div>
+    </div>
+</div>
+<app-navigation-mobile class="min-[1027px]:hidden flex justify-center" [email]="userDetails.body.email"></app-navigation-mobile>
+

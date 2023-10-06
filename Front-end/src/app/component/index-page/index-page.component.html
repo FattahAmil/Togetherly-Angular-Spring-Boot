@@ -1,0 +1,15 @@
+<app-nav-bar ></app-nav-bar>
+<div  class="grid grid-cols-1 px-4 gap-4 min-[1027px]:grid-cols-4 lg:gap-8">
+    <div class=" max-[1027px]:hidden">
+        <app-show-profile class="w-full flex justify-center" ></app-show-profile>
+    </div>
+    <div class="lg:col-span-2 gap-4 flex flex-col">
+        <app-create-post *ngIf="checkRoleAdminTeacher()"  [userDetails]="userDetails"></app-create-post>
+        <app-show-post #childShowPost ></app-show-post>
+    </div>
+    <div class="gap-3 flex flex-col max-[1027px]:hidden">
+        <app-show-latest-messages class="w-full flex justify-center" ></app-show-latest-messages>
+        <app-show-followers class="w-full flex justify-center" ></app-show-followers>
+    </div>
+</div>
+<app-navigation-mobile class="min-[1027px]:hidden flex justify-center" [email]="userDetails.body.email"></app-navigation-mobile>
