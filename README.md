@@ -26,19 +26,33 @@ This is a Togetherly project built with Spring Boot (backend) and Angular (front
 ## Images
 
 ![GitHub 1](./images/1.png)
+
 ![GitHub 2](./images/2.png)
+
 ![GitHub 3](./images/3.png)
+
 ![GitHub 4](./images/4.png)
+
 ![GitHub 5](./images/5.png)
+
 ![GitHub 6](./images/6.png)
+
 ![GitHub 7](./images/7.png)
+
 ![GitHub 8](./images/8.png)
+
 ![GitHub 9](./images/9.png)
+
 ![GitHub 10](./images/10.png)
+
 ![GitHub 11](./images/11.png)
+
 ![GitHub 12](./images/12.png)
+
 ![GitHub 13](./images/13.png)
+
 ![GitHub 14](./images/14.png)
+
 ![GitHub 15](./images/15.png)
 
 
@@ -95,10 +109,6 @@ This is a Togetherly project built with Spring Boot (backend) and Angular (front
    - Follow other users and chat with friends.
    - Receive notifications for activity on your Togetherly account.
 
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
