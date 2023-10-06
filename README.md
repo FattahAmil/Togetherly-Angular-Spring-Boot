@@ -36,7 +36,7 @@ This is a Togetherly project built with Spring Boot (backend) and Angular (front
 2. Open the `backend` directory:
 
    ```bash
-   cd backend
+   cd Back-end
    ```
 
 3. Configure the application.properties file with your database settings, JWT secret, and other necessary configurations.
@@ -52,7 +52,7 @@ This is a Togetherly project built with Spring Boot (backend) and Angular (front
 1. Open the `frontend` directory:
 
    ```bash
-   cd frontend
+   cd Front-end
    ```
 
 2. Install dependencies:
