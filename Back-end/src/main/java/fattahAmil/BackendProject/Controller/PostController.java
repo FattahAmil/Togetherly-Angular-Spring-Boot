@@ -21,8 +21,6 @@ public class PostController {
 
     private final CommentService commentService;
 
-    @Autowired
-    private UserRepository userRepository;
 
 
 
