@@ -18,7 +18,7 @@
     "@angular/platform-browser": "^16.1.0",
     "@angular/platform-browser-dynamic": "^16.1.0",
     "@angular/router": "^16.1.0",
-    "bcrypt": "^5.1.1",
+    "bcrypt": "^6.0.0",
     "bootstrap": "^5.3.1",
     "flowbite": "^1.8.1",
     "jwt-decode": "^3.1.2",
